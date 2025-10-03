@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Social City - Mi Perfil</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="main-nav">
+    <h2 class="social-city-logo">Social City</h2>
+    <ul>
+      <li><a href="main.html">Inicio</a></li>
+      <li><a href="profile.html">Mi Perfil</a></li>
+      <li><a href="shop.html">Tienda</a></li>
+      <li><a href="index.html" id="logoutBtn">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+  <section class="profile-section">
+    <h3>Mi Perfil</h3>
+    <form id="editProfileForm">
+      <input type="text" placeholder="Nombre" required>
+      <input type="text" placeholder="Categoría principal" required>
+      <textarea placeholder="Descripción o rasgos..."></textarea>
+      <button type="submit" class="btn">Guardar cambios</button>
+    </form>
+    <h4>Galería</h4>
+    <div class="gallery" id="gallery">
+      <!-- Imágenes publicadas por el usuario -->
+    </div>
+    <form id="addImageForm">
+      <input type="url" placeholder="URL de imagen">
+      <button type="submit" class="btn">Agregar imagen</button>
+    </form>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>

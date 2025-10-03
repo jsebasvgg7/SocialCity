@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Social City - Inicio de sesión</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1 class="social-city-logo">Social City</h1>
+    <form class="login-form" id="loginForm">
+      <input type="text" placeholder="Usuario" required>
+      <input type="password" placeholder="Contraseña" required>
+      <button type="submit" class="btn">Iniciar sesión</button>
+      <div class="register-link">
+        <span>¿No tienes cuenta?</span>
+        <a href="#" id="goToRegister">Regístrate</a>
+      </div>
+    </form>
+    <form class="register-form hidden" id="registerForm">
+      <input type="text" placeholder="Usuario" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <input type="password" placeholder="Contraseña" required>
+      <button type="submit" class="btn">Crear cuenta</button>
+      <div class="register-link">
+        <span>¿Ya tienes cuenta?</span>
+        <a href="#" id="goToLogin">Iniciar sesión</a>
+      </div>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
