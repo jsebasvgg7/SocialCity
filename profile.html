@@ -4,6 +4,29 @@
   <meta charset="UTF-8">
   <title>Social City - Mi Perfil</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJoOiEzFnVoCtb1Af1SLaBUX6l9zU3gQE",
+      authDomain: "socialcity-0510.firebaseapp.com",
+      projectId: "socialcity-0510",
+      storageBucket: "socialcity-0510.firebasestorage.app",
+      messagingSenderId: "111018836617",
+      appId: "1:111018836617:web:3e818b523fecf83ff5fc58",
+      measurementId: "G-ZGK0CD9EYP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    window.firebaseAuth = getAuth(app);
+    window.firebaseDb = getFirestore(app);
+    window.setDoc = setDoc;
+    window.doc = doc;
+    window.getDoc = getDoc;
+  </script>
 </head>
 <body>
   <nav class="main-nav">
@@ -24,14 +47,12 @@
       <button type="submit" class="btn">Guardar cambios</button>
     </form>
     <h4>Galería</h4>
-    <div class="gallery" id="gallery">
-      <!-- Imágenes publicadas por el usuario -->
-    </div>
+    <div class="gallery" id="gallery"></div>
     <form id="addImageForm">
       <input type="url" placeholder="URL de imagen">
       <button type="submit" class="btn">Agregar imagen</button>
     </form>
   </section>
-  <script src="app.js"></script>
+  <script src="profile.js" type="module"></script>
 </body>
 </html>
