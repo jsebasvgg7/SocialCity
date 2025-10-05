@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const goToRegister = document.getElementById('goToRegister');
   const goToLogin = document.getElementById('goToLogin');
 
+  // Navegación entre login y registro
   if (goToRegister && goToLogin) {
     goToRegister.addEventListener('click', (e) => {
       e.preventDefault();
@@ -18,21 +19,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Ejemplo de inicio de sesión ficticio
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      window.location.href = 'main.html';
-    });
-  }
+  // Registro de usuario con Firebase
   if (registerForm) {
-    registerForm.addEventListener('submit', (e) => {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      window.location.href = 'main.html';
+      const username = registerForm.querySelector('input[type="text"]').value.trim();
+      const email = registerForm.querySelector('input[type="email"]').value.trim();
+      const password = registerForm.querySelector('input[type="password"]').value;
+      try {
+        // Registra el usuario en Firebase Auth
+        const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+        // Guarda datos adicionales en Firestore
+        await window.setDoc(
+          window.doc(window.firebaseDb, "users", userCredential.user.uid),
+          { username, email }
+        );
+        window.location.href = "main.html";
+      } catch (error) {
+        alert("Error al registrar: " + error.message);
+      }
     });
   }
 
-  // Buscador de rasgos en main.html
+  // Inicio de sesión con Firebase
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = loginForm.querySelector('input[type="email"]').value.trim();
+      const password = loginForm.querySelector('input[type="password"]').value;
+      try {
+        await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+        window.location.href = "main.html";
+      } catch (error) {
+        alert("Usuario o contraseña incorrectos");
+      }
+    });
+  }
+
+  // Buscador de rasgos en main.html (sin cambios)
   const searchForm = document.getElementById('searchForm');
   const profilesList = document.getElementById('profilesList');
   if (searchForm && profilesList) {
@@ -55,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Galería en profile.html
+  // Galería en profile.html (sin cambios)
   const addImageForm = document.getElementById('addImageForm');
   const gallery = document.getElementById('gallery');
   if (addImageForm && gallery) {
@@ -71,12 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cerrar sesión
+  // Cerrar sesión con Firebase
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', (e) => {
-      // Redirección a inicio
-      window.location.href = 'index.html';
+    logoutBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await window.signOut(window.firebaseAuth);
+      } catch (error) {
+        // Si hay error, lo ignoramos para el logout básico
+      }
+      window.location.href = "index.html";
     });
   }
 });
