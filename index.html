@@ -4,12 +4,42 @@
   <meta charset="UTF-8">
   <title>Social City - Inicio de sesión</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+    // Tu configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJoOiEzFnVoCtb1Af1SLaBUX6l9zU3gQE",
+      authDomain: "socialcity-0510.firebaseapp.com",
+      projectId: "socialcity-0510",
+      storageBucket: "socialcity-0510.firebasestorage.app",
+      messagingSenderId: "111018836617",
+      appId: "1:111018836617:web:3e818b523fecf83ff5fc58",
+      measurementId: "G-ZGK0CD9EYP"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    window.firebaseAuth = auth;
+    window.firebaseDb = db;
+    window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+    window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    window.signOut = signOut;
+    window.setDoc = setDoc;
+    window.doc = doc;
+  </script>
 </head>
 <body>
   <div class="login-container">
     <h1 class="social-city-logo">Social City</h1>
     <form class="login-form" id="loginForm">
-      <input type="text" placeholder="Usuario" required>
+      <input type="email" placeholder="Correo electrónico" required>
       <input type="password" placeholder="Contraseña" required>
       <button type="submit" class="btn">Iniciar sesión</button>
       <div class="register-link">
